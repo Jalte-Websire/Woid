@@ -1,0 +1,251 @@
+.content {
+  padding: 6rem 0;
+  background: var(--background);
+  position: relative;
+}
+
+.content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, var(--primary) 0%, transparent 70%);
+  opacity: 0.05;
+  z-index: 1;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.pricingPlans {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+.plan {
+  background: var(--card);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  border: 1px solid var(--border);
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: var(--shadow-sm);
+}
+
+.plan:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary);
+}
+
+.popular {
+  border: 2px solid var(--primary);
+  transform: scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.popular:hover {
+  transform: scale(1.02) translateY(-8px);
+}
+
+.popularBadge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--primary), var(--accent-foreground));
+  color: var(--primary-foreground);
+  padding: 0.5rem 1.5rem;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-normal);
+  box-shadow: var(--shadow-md);
+}
+
+.planHeader {
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.planHeader h3 {
+  color: var(--foreground);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: calc(var(--tracking-normal) - 0.02em);
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+}
+
+.amount {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--foreground);
+  letter-spacing: calc(var(--tracking-normal) - 0.05em);
+}
+
+.currency {
+  font-size: 1.25rem;
+  color: var(--muted-foreground);
+  margin-left: 0.5rem;
+  font-weight: 500;
+}
+
+.planHeader p {
+  color: var(--muted-foreground);
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: var(--tracking-normal);
+}
+
+.subDescription {
+  color: var(--muted-foreground) !important;
+  font-size: 0.95rem !important;
+  margin-top: 0.75rem !important;
+  line-height: 1.6;
+  letter-spacing: var(--tracking-normal);
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  flex-grow: 1;
+}
+
+.features li {
+  margin-bottom: 0.75rem;
+  padding-left: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.featureIcon {
+  font-size: 1.1rem;
+  margin-right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.featureText {
+  flex: 1;
+  font-size: 0.95rem;
+  letter-spacing: var(--tracking-normal);
+}
+
+.includedFeature .featureIcon {
+  color: var(--primary);
+}
+
+.includedFeature .featureText {
+  color: var(--foreground);
+}
+
+.excludedFeature .featureIcon {
+  color: var(--muted-foreground);
+  opacity: 0.5;
+}
+
+.excludedFeature .featureText {
+  color: var(--muted-foreground);
+  opacity: 0.7;
+  text-decoration: line-through;
+}
+
+.planButton {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary), var(--accent-foreground));
+  color: var(--primary-foreground);
+  border: none;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: auto;
+  letter-spacing: var(--tracking-normal);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.planButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.planButton:hover::before {
+  left: 100%;
+}
+
+.planButton:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.popular .planButton {
+  background: linear-gradient(135deg, var(--primary), var(--accent-foreground));
+  color: var(--primary-foreground);
+  box-shadow: var(--shadow-lg);
+}
+
+.popular .planButton:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 4rem 0;
+  }
+  
+  .pricingPlans {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .popular {
+    transform: none;
+  }
+  
+  .popular:hover {
+    transform: translateY(-8px);
+  }
+  
+  .plan {
+    padding: 2rem;
+  }
+  
+  .amount {
+    font-size: 3rem;
+  }
+} 

@@ -1,0 +1,135 @@
+.header {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: calc(100% - 40px);
+  max-width: 1200px;
+}
+
+.container {
+  background: rgba(34, 35, 44, 0.8);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem 1rem 0.8rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 70px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logoOrbWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 48px;
+}
+
+.logoOrb {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+}
+
+.logoText {
+  position: relative;
+  z-index: 2;
+  color: var(--foreground);
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: calc(var(--tracking-normal) - 0.03em);
+  background: linear-gradient(135deg, var(--primary), var(--accent-foreground));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.navList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2.5rem;
+}
+
+.navItem {
+  margin: 0;
+}
+
+.navLink {
+  color: var(--muted-foreground);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  letter-spacing: var(--tracking-normal);
+}
+
+.navLink:hover {
+  color: var(--foreground);
+  transform: translateY(-1px);
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(135deg, var(--primary), var(--accent-foreground));
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 1px;
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .header {
+    top: 15px;
+    width: calc(100% - 20px);
+  }
+  
+  .container {
+    padding: 0.75rem 1.5rem;
+    height: 60px;
+    border-radius: calc(var(--radius) - 0.5rem);
+  }
+  
+  .logoText {
+    font-size: 1.5rem;
+  }
+  
+  .navList {
+    gap: 1.5rem;
+  }
+  
+  .navLink {
+    font-size: 0.85rem;
+  }
+} 

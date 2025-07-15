@@ -1,0 +1,500 @@
+.main {
+  min-height: 80vh;
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--background) 0%, var(--card) 100%);
+  color: var(--foreground);
+  padding: 12vh 0 8vh 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 70%, var(--primary) 0%, transparent 50%),
+              radial-gradient(circle at 70% 30%, var(--accent) 0%, transparent 50%);
+  opacity: 0.1;
+  z-index: 1;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: calc(var(--tracking-normal) - 0.02em);
+  color: var(--foreground);
+}
+
+.subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: var(--muted-foreground);
+  letter-spacing: var(--tracking-normal);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.content {
+  padding: 6rem 0;
+  background: var(--background);
+}
+
+.section {
+  margin-bottom: 4rem;
+}
+
+.section h2 {
+  color: var(--foreground);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  letter-spacing: calc(var(--tracking-normal) - 0.02em);
+}
+
+.section p {
+  color: var(--muted-foreground);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 800px;
+  letter-spacing: var(--tracking-normal);
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.feature {
+  background: var(--card);
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  border-left: 4px solid var(--primary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+
+.feature:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary);
+}
+
+.featureIcon {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  color: var(--primary);
+}
+
+.feature h3 {
+  color: var(--foreground);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-normal);
+}
+
+.feature p {
+  color: var(--muted-foreground);
+  margin: 0;
+  letter-spacing: var(--tracking-normal);
+}
+
+/* Statistics Section */
+.statsSection {
+  padding: 6rem 0;
+  background: var(--card);
+  color: var(--foreground);
+  position: relative;
+  overflow: hidden;
+}
+
+.statsSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, var(--primary) 0%, transparent 70%);
+  opacity: 0.1;
+  z-index: 1;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.statItem {
+  padding: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.statItem:hover {
+  transform: scale(1.05);
+}
+
+.statNumber {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), var(--accent-foreground));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+  letter-spacing: calc(var(--tracking-normal) - 0.05em);
+}
+
+.statLabel {
+  font-size: 1.1rem;
+  color: var(--muted-foreground);
+  letter-spacing: var(--tracking-normal);
+}
+
+.sectionTitle {
+  color: var(--foreground);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 700;
+  letter-spacing: calc(var(--tracking-normal) - 0.02em);
+}
+
+/* Team Section */
+.teamSection {
+  padding: 6rem 0;
+  background: var(--background);
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+}
+
+.teamMember {
+  background: var(--card);
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--border);
+}
+
+.teamMember:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary);
+}
+
+.memberPhoto {
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.avatarPlaceholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent-foreground));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  color: var(--primary-foreground);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: var(--tracking-normal);
+}
+
+.teamMember h3 {
+  color: var(--foreground);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-normal);
+}
+
+.memberRole {
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  letter-spacing: var(--tracking-normal);
+}
+
+.teamMember p:last-child {
+  color: var(--muted-foreground);
+  line-height: 1.6;
+  letter-spacing: var(--tracking-normal);
+}
+
+/* Timeline Section */
+.timelineSection {
+  padding: 6rem 0;
+  background: var(--card);
+}
+
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+  transform: translateX(-50%);
+}
+
+.timelineItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.timelineItem:nth-child(odd) {
+  flex-direction: row-reverse;
+}
+
+.timelineItem:nth-child(odd) .timelineContent {
+  text-align: right;
+  margin-right: 2rem;
+  margin-left: 0;
+}
+
+.timelineItem:nth-child(even) .timelineContent {
+  margin-left: 2rem;
+}
+
+.timelineYear {
+  background: linear-gradient(135deg, var(--primary), var(--accent-foreground));
+  color: var(--primary-foreground);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-md);
+  letter-spacing: var(--tracking-normal);
+}
+
+.timelineContent {
+  flex: 1;
+  max-width: 300px;
+}
+
+.timelineContent h3 {
+  color: var(--foreground);
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-normal);
+}
+
+.timelineContent p {
+  color: var(--muted-foreground);
+  line-height: 1.6;
+  letter-spacing: var(--tracking-normal);
+}
+
+/* CTA Section */
+.ctaSection {
+  padding: 6rem 0;
+  background: linear-gradient(135deg, var(--background) 0%, var(--card) 100%);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, var(--primary) 0%, transparent 70%);
+  opacity: 0.1;
+  z-index: 1;
+}
+
+.ctaContent {
+  position: relative;
+  z-index: 2;
+}
+
+.ctaContent h2 {
+  color: var(--foreground);
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: calc(var(--tracking-normal) - 0.02em);
+}
+
+.ctaContent p {
+  color: var(--muted-foreground);
+  font-size: 1.2rem;
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  letter-spacing: var(--tracking-normal);
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, var(--primary), var(--accent-foreground));
+  color: var(--primary-foreground);
+  border: none;
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: var(--tracking-normal);
+  box-shadow: var(--shadow-md);
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.secondaryButton {
+  background: transparent;
+  color: var(--foreground);
+  border: 2px solid var(--border);
+  padding: 0.875rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: var(--tracking-normal);
+}
+
+.secondaryButton:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 4rem 0;
+  }
+  
+  .title {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+  
+  .content {
+    padding: 4rem 0;
+  }
+  
+  .features {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .statsSection,
+  .teamSection,
+  .timelineSection,
+  .ctaSection {
+    padding: 4rem 0;
+  }
+  
+  .statsGrid,
+  .teamGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .statNumber {
+    font-size: 2.5rem;
+  }
+  
+  .ctaContent h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+  }
+  
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .timeline::before {
+    left: 20px;
+  }
+  
+  .timelineItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .timelineItem .timelineContent {
+    margin-left: 3rem;
+    margin-right: 0;
+    text-align: left;
+  }
+  
+  .timelineYear {
+    width: 60px;
+    height: 60px;
+    font-size: 0.9rem;
+  }
+} 
