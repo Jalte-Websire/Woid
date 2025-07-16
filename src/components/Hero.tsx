@@ -4,7 +4,7 @@ import styles from './Hero.module.css';
 import Orb from './Orb';
 
 function SplashCursor() {
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -24,6 +24,8 @@ function SplashCursor() {
 
     // Simple vertex shader
     const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+    if (!vertexShader) return;
+    
     gl.shaderSource(vertexShader, `
       attribute vec2 position;
       varying vec2 uv;
@@ -36,6 +38,8 @@ function SplashCursor() {
 
     // Simple fragment shader for fluid effect
     const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+    if (!fragmentShader) return;
+    
     gl.shaderSource(fragmentShader, `
       precision highp float;
       varying vec2 uv;
@@ -65,6 +69,8 @@ function SplashCursor() {
 
     // Create program
     const program = gl.createProgram();
+    if (!program) return;
+    
     gl.attachShader(program, vertexShader);
     gl.attachShader(program, fragmentShader);
     gl.linkProgram(program);
@@ -72,6 +78,8 @@ function SplashCursor() {
 
     // Create buffer
     const buffer = gl.createBuffer();
+    if (!buffer) return;
+    
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
 
@@ -88,18 +96,20 @@ function SplashCursor() {
     let mouse = [0.5, 0.5];
     let mouseDown = 0;
 
-    const updateMouse = (e) => {
+    const updateMouse = (e: MouseEvent | TouchEvent) => {
       const rect = canvas.getBoundingClientRect();
-      mouse[0] = (e.clientX - rect.left) / rect.width;
-      mouse[1] = 1.0 - (e.clientY - rect.top) / rect.height;
+      const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+      const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+      mouse[0] = (clientX - rect.left) / rect.width;
+      mouse[1] = 1.0 - (clientY - rect.top) / rect.height;
     };
 
-    const handleMouseDown = (e) => {
+    const handleMouseDown = (e: MouseEvent | TouchEvent) => {
       mouseDown = 1;
       updateMouse(e);
     };
 
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent | TouchEvent) => {
       updateMouse(e);
     };
 
@@ -119,9 +129,9 @@ function SplashCursor() {
     const render = () => {
       const time = (Date.now() - startTime) * 0.001;
       
-      gl.uniform1f(timeLocation, time);
-      gl.uniform2f(mouseLocation, mouse[0], mouse[1]);
-      gl.uniform1f(mouseDownLocation, mouseDown);
+      if (timeLocation) gl.uniform1f(timeLocation, time);
+      if (mouseLocation) gl.uniform2f(mouseLocation, mouse[0], mouse[1]);
+      if (mouseDownLocation) gl.uniform1f(mouseDownLocation, mouseDown);
       
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       requestAnimationFrame(render);
@@ -137,6 +147,12 @@ function SplashCursor() {
       canvas.removeEventListener('touchstart', handleMouseDown);
       canvas.removeEventListener('touchmove', handleMouseMove);
       canvas.removeEventListener('touchend', handleMouseUp);
+      
+      // Cleanup WebGL resources
+      gl.deleteShader(vertexShader);
+      gl.deleteShader(fragmentShader);
+      gl.deleteProgram(program);
+      gl.deleteBuffer(buffer);
     };
   }, []);
 

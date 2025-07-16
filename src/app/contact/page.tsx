@@ -1,7 +1,9 @@
+"use client";
+
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { SolarSystemIcon, OrbitIcon, HexagonIcon } from '../../components/Icons';
-import SplitText from '../../components/SplitText';
+import { OrbitIcon, CircleIcon, StarIcon } from '../../components/Icons';
+import BlurText from '../../components/BlurText';
 import styles from './contact.module.css';
 
 export default function Contact() {
@@ -12,21 +14,16 @@ export default function Contact() {
         {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>
-            <SplitText
-              text="Lad os skabe noget fantastisk sammen"
+            <BlurText
+              text="Kontakt os"
               className={styles.title}
-              splitType="chars"
-              textAlign="center"
-              duration={1}
-              delay={20}
+              type="title"
             />
-            <SplitText
-              text="Din digitale tilstedeværelse venter - lad os bringe dine idéer til live med cutting-edge teknologi og strategisk design"
+            <BlurText
+              text="Lad os skabe noget fantastisk sammen - vi er klar til at høre om dit næste projekt"
               className={styles.subtitle}
-              splitType="words"
-              textAlign="center"
-              duration={1}
-              delay={20}
+              type="subtitle"
+              delay={0.1}
             />
           </div>
         </section>
@@ -46,8 +43,8 @@ export default function Contact() {
                   <div className={styles.contactMethod}>
                     <div>
                       <h3>Email</h3>
-                      <p>info@woit.dk</p>
-                      <p>support@woit.dk</p>
+                      <p>info@void.dk</p>
+                      <p>support@void.dk</p>
                     </div>
                   </div>
 

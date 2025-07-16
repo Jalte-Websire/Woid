@@ -49,6 +49,7 @@
   letter-spacing: var(--tracking-normal);
   max-width: 600px;
   margin: 0 auto;
+  font-weight: 300;
 }
 
 @media (max-width: 768px) {

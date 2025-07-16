@@ -1,115 +1,116 @@
-import { motion } from 'framer-motion';
-import { useEffect, useRef, useState, useMemo } from 'react';
+'use client';
 
-const buildKeyframes = (from, steps) => {
-  const keys = new Set([
-    ...Object.keys(from),
-    ...steps.flatMap((s) => Object.keys(s)),
-  ]);
+import { motion, useInView, useAnimation, Variants } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
-  const keyframes = {};
-  keys.forEach((k) => {
-    keyframes[k] = [from[k], ...steps.map((s) => s[k])];
-  });
-  return keyframes;
-};
+interface BlurTextProps {
+  text: string;
+  className?: string;
+  type?: 'title' | 'subtitle';
+  delay?: number;
+  duration?: number;
+}
 
-const BlurText = ({
-  text = '',
-  delay = 200,
-  className = '',
-  animateBy = 'words',
-  direction = 'top',
-  threshold = 0.1,
-  rootMargin = '0px',
-  animationFrom,
-  animationTo,
-  easing = (t) => t,
-  onAnimationComplete,
-  stepDuration = 0.35,
-}) => {
-  const elements = animateBy === 'words' ? text.split(' ') : text.split('');
-  const [inView, setInView] = useState(false);
+const BlurText = ({ 
+  text, 
+  className = "", 
+  type = "title",
+  delay = 0,
+  duration = 0.5 
+}: BlurTextProps) => {
   const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const controls = useAnimation();
+
+  const words = text.split(" ").map(word => word.trim()).filter(Boolean);
+
+  const container: Variants = {
+    hidden: { 
+      opacity: 0,
+      transition: { 
+        when: "afterChildren",
+      }
+    },
+    visible: {
+      opacity: 1,
+      transition: { 
+        when: "beforeChildren",
+        staggerChildren: 0.035,
+        delayChildren: delay,
+        ease: [0.2, 0.65, 0.3, 0.9],
+      }
+    }
+  };
+
+  const child: Variants = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+      filter: "blur(10px)",
+      transition: {
+        type: "tween",
+        duration: 0.1,
+      }
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: {
+        type: "tween",
+        duration: duration,
+        ease: [0.2, 0.65, 0.3, 0.9],
+      }
+    }
+  };
 
   useEffect(() => {
-    if (!ref.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          observer.unobserve(ref.current);
-        }
-      },
-      { threshold, rootMargin }
-    );
-    observer.observe(ref.current);
-    return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [threshold, rootMargin]);
+    if (isInView) {
+      controls.start("visible");
+    }
+  }, [isInView, controls]);
 
-  const defaultFrom = useMemo(
-    () =>
-      direction === 'top'
-        ? { filter: 'blur(10px)', opacity: 0, y: -50 }
-        : { filter: 'blur(10px)', opacity: 0, y: 50 },
-    [direction]
-  );
-
-  const defaultTo = useMemo(
-    () => [
-      {
-        filter: 'blur(5px)',
-        opacity: 0.5,
-        y: direction === 'top' ? 5 : -5,
-      },
-      { filter: 'blur(0px)', opacity: 1, y: 0 },
-    ],
-    [direction]
-  );
-
-  const fromSnapshot = animationFrom ?? defaultFrom;
-  const toSnapshots = animationTo ?? defaultTo;
-
-  const stepCount = toSnapshots.length + 1;
-  const totalDuration = stepDuration * (stepCount - 1);
-  const times = Array.from({ length: stepCount }, (_, i) =>
-    stepCount === 1 ? 0 : i / (stepCount - 1)
-  );
+  const Tag = type === 'title' ? 'h1' : 'p';
 
   return (
-    <p
+    <Tag 
       ref={ref}
       className={className}
-      style={{ display: 'flex', flexWrap: 'wrap' }}
+      style={{ 
+        position: 'relative',
+        paddingTop: '0.5em',
+        paddingBottom: '0.5em',
+        marginTop: '-0.5em',
+        marginBottom: '-0.5em',
+        willChange: 'transform'
+      }}
     >
-      {elements.map((segment, index) => {
-        const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
-
-        const spanTransition = {
-          duration: totalDuration,
-          times,
-          delay: (index * delay) / 1000,
-        };
-        (spanTransition).ease = easing;
-
-        return (
+      <motion.span
+        initial="hidden"
+        animate={controls}
+        variants={container}
+        style={{ 
+          display: 'block',
+          willChange: 'transform',
+        }}
+      >
+        {words.map((word, index) => (
           <motion.span
-            className="inline-block will-change-[transform,filter,opacity]"
             key={index}
-            initial={fromSnapshot}
-            animate={inView ? animateKeyframes : fromSnapshot}
-            transition={spanTransition}
-            onAnimationComplete={
-              index === elements.length - 1 ? onAnimationComplete : undefined
-            }
+            variants={child}
+            style={{ 
+              display: 'inline-block',
+              whiteSpace: 'pre',
+              willChange: 'transform, opacity, filter',
+              padding: '0.1em 0',
+            }}
           >
-            {segment === ' ' ? '\u00A0' : segment}
-            {animateBy === 'words' && index < elements.length - 1 && '\u00A0'}
+            {word}
+            {index !== words.length - 1 && "\u00A0"}
           </motion.span>
-        );
-      })}
-    </p>
+        ))}
+      </motion.span>
+    </Tag>
   );
 };
 

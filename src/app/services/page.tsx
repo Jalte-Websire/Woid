@@ -1,18 +1,16 @@
+"use client";
+
+import Link from 'next/link';
 import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import { 
-  CircleIcon, // planet
-  SquareIcon, // asteroid
-  TriangleIcon, // komet
-  OrbitIcon, // solsystem
-  GridIcon, // galakse
-  StarIcon, // stjerne
-  OverlappingSquaresIcon, // saturn
-  CrossIcon, // nebula
-  SolarSystemIcon, // ellipse solsystem
-  HexagonIcon // sort hul
+import {
+  LaptopIcon,
+  CodeIcon,
+  MobileIcon,
+  GearsIcon,
+  BrainNetworkIcon,
+  GrowthGraphIcon
 } from '../../components/Icons';
-import SplitText from '../../components/SplitText';
+import BlurText from '../../components/BlurText';
 import styles from './services.module.css';
 
 export default function Services() {
@@ -23,21 +21,16 @@ export default function Services() {
         {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>
-            <SplitText
+            <BlurText
               text="Vores services"
               className={styles.title}
-              splitType="chars"
-              textAlign="center"
-              duration={1}
-              delay={20}
+              type="title"
             />
-            <SplitText
+            <BlurText
               text="Alt hvad du har brug for til din digitale tilstedeværelse - komplette løsninger til moderne virksomheder"
               className={styles.subtitle}
-              splitType="words"
-              textAlign="center"
-              duration={1}
-              delay={20}
+              type="subtitle"
+              delay={0.1}
             />
           </div>
         </section>
@@ -48,9 +41,9 @@ export default function Services() {
             <h2 className={styles.sectionTitle}>Komplette digitale løsninger</h2>
             <p className={styles.sectionSubtitle}>Vi leverer end-to-end digitale løsninger der driver forretningsvækst og brugerengagement</p>
             <div className={styles.serviceGrid}>
-              <div className={styles.service}>
+              <Link href="/services/website-udvikling" className={styles.service}>
                 <div className={styles.serviceIcon + ' ' + styles.iconWrapper}>
-                  <CircleIcon />
+                  <LaptopIcon />
                 </div>
                 <h3>Website udvikling</h3>
                 <p>Skræddersyede websites der konverterer og engagerer dine besøgende. Ren æstetik med kraftfuld funktionalitet.</p>
@@ -60,11 +53,11 @@ export default function Services() {
                   <li>Hurtig indlæsningstid</li>
                   <li>Skalerbar arkitektur</li>
                 </ul>
-              </div>
+              </Link>
 
-              <div className={styles.service}>
+              <Link href="/services/e-handel" className={styles.service}>
                 <div className={styles.serviceIcon + ' ' + styles.iconWrapper}>
-                  <SquareIcon />
+                  <CodeIcon />
                 </div>
                 <h3>E-handel løsninger</h3>
                 <p>Professionelle webshops der sælger og vokser din virksomhed. Bygget til at konvertere og skabe loyalitet.</p>
@@ -74,11 +67,11 @@ export default function Services() {
                   <li>Mobil-venlig shopping</li>
                   <li>Avancerede analytics</li>
                 </ul>
-              </div>
+              </Link>
 
-              <div className={styles.service}>
+              <Link href="/services/app-udvikling" className={styles.service}>
                 <div className={styles.serviceIcon + ' ' + styles.iconWrapper}>
-                  <TriangleIcon />
+                  <MobileIcon />
                 </div>
                 <h3>App udvikling</h3>
                 <p>Native og web apps der giver dine kunder en fantastisk oplevelse. Performance og brugeroplevelse i centrum.</p>
@@ -88,11 +81,11 @@ export default function Services() {
                   <li>Push-notifikationer</li>
                   <li>Offline funktionalitet</li>
                 </ul>
-              </div>
+              </Link>
 
-              <div className={styles.service}>
+              <Link href="/services/ui-ux-design" className={styles.service}>
                 <div className={styles.serviceIcon + ' ' + styles.iconWrapper}>
-                  <OverlappingSquaresIcon />
+                  <GearsIcon />
                 </div>
                 <h3>UI/UX design</h3>
                 <p>Brugeroplevelser der engagerer og konverterer dine besøgende. Data-drevet design med fokus på resultater.</p>
@@ -102,13 +95,13 @@ export default function Services() {
                   <li>Design systemer</li>
                   <li>Konverteringsoptimering</li>
                 </ul>
-              </div>
+              </Link>
 
-              <div className={styles.service}>
+              <Link href="/services/vedligeholdelse" className={styles.service}>
                 <div className={styles.serviceIcon + ' ' + styles.iconWrapper}>
-                  <SolarSystemIcon />
+                  <BrainNetworkIcon />
                 </div>
-                <h3>Vedligeholdelse & support</h3>
+                <h3>Vedligeholdelse</h3>
                 <p>Kontinuerlig opdatering og support til dine digitale løsninger. Sikkerhed og performance i fokus.</p>
                 <ul className={styles.features}>
                   <li>24/7 overvågning</li>
@@ -116,11 +109,11 @@ export default function Services() {
                   <li>Teknisk support</li>
                   <li>Sikkerhedsopdateringer</li>
                 </ul>
-              </div>
+              </Link>
 
-              <div className={styles.service}>
+              <Link href="/services/digital-strategi" className={styles.service}>
                 <div className={styles.serviceIcon + ' ' + styles.iconWrapper}>
-                  <HexagonIcon />
+                  <GrowthGraphIcon />
                 </div>
                 <h3>Digital strategi</h3>
                 <p>Strategisk rådgivning til at maksimere din digitale tilstedeværelse. Data-drevne beslutninger for vækst.</p>
@@ -130,7 +123,7 @@ export default function Services() {
                   <li>Konverteringsoptimering</li>
                   <li>Forretningsanalyse</li>
                 </ul>
-              </div>
+              </Link>
             </div>
           </div>
         </section>
@@ -177,7 +170,6 @@ export default function Services() {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   );
 } 

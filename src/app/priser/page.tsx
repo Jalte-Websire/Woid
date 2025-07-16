@@ -1,10 +1,9 @@
 "use client";
 
 import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import PricingPlans, { PricingPlan, PricingPlanFeature } from '../../components/PricingPlans';
+import PricingPlans, { PricingPlan } from '../../components/PricingPlans';
 import { createFeature } from '../../components/PricingIcons';
-import SplitText from '../../components/SplitText';
+import BlurText from '../../components/BlurText';
 import styles from './priser.module.css';
 
 export default function Priser() {
@@ -110,21 +109,16 @@ export default function Priser() {
       <main className={styles.main}>
         <section className={styles.hero}>
           <div className={styles.container}>
-            <SplitText
-              text="Vores Priser"
+            <BlurText
+              text="Vores priser"
               className={styles.title}
-              splitType="chars"
-              textAlign="center"
-              duration={1}
-              delay={20}
+              type="title"
             />
-            <SplitText
+            <BlurText
               text="Transparente priser for exceptionelle digitale løsninger"
               className={styles.subtitle}
-              splitType="words"
-              textAlign="center"
-              duration={1}
-              delay={20}
+              type="subtitle"
+              delay={0.1}
             />
           </div>
         </section>
@@ -134,7 +128,6 @@ export default function Priser() {
           onPlanSelect={handlePlanSelect}
         />
       </main>
-      <Footer />
     </div>
   );
 } 

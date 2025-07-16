@@ -3,13 +3,20 @@ import { useEffect, useRef } from "react";
 import { Renderer, Program, Mesh, Triangle, Vec3 } from "ogl";
 import "./Orb.css";
 
+interface OrbProps {
+  hue?: number;
+  hoverIntensity?: number;
+  rotateOnHover?: boolean;
+  forceHoverState?: boolean;
+}
+
 export default function Orb({
   hue = 0,
   hoverIntensity = 0.2,
   rotateOnHover = true,
   forceHoverState = false,
-}) {
-  const ctnDom = useRef(null);
+}: OrbProps) {
+  const ctnDom = useRef<HTMLDivElement>(null);
 
   const vert = `
     precision highp float;
@@ -151,10 +158,12 @@ export default function Orb({
   useEffect(() => {
     const container = ctnDom.current;
     if (!container) return;
+
     const renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
     container.appendChild(gl.canvas);
+
     const geometry = new Triangle(gl);
     const program = new Program(gl, {
       vertex: vert,
@@ -174,7 +183,9 @@ export default function Orb({
         hoverIntensity: { value: hoverIntensity },
       },
     });
+
     const mesh = new Mesh(gl, { geometry, program });
+
     function resize() {
       if (!container) return;
       const dpr = window.devicePixelRatio || 1;
@@ -189,13 +200,16 @@ export default function Orb({
         gl.canvas.width / gl.canvas.height
       );
     }
+
     window.addEventListener("resize", resize);
     resize();
+
     let targetHover = 0;
     let lastTime = 0;
     let currentRot = 0;
     const rotationSpeed = 0.3;
-    const handleMouseMove = (e) => {
+
+    const handleMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
@@ -212,13 +226,16 @@ export default function Orb({
         targetHover = 0;
       }
     };
+
     const handleMouseLeave = () => {
       targetHover = 0;
     };
+
     container.addEventListener("mousemove", handleMouseMove);
     container.addEventListener("mouseleave", handleMouseLeave);
-    let rafId;
-    const update = (t) => {
+
+    let rafId: number;
+    const update = (t: number) => {
       rafId = requestAnimationFrame(update);
       const dt = (t - lastTime) * 0.001;
       lastTime = t;
@@ -227,21 +244,30 @@ export default function Orb({
       program.uniforms.hoverIntensity.value = hoverIntensity;
       const effectiveHover = forceHoverState ? 1 : targetHover;
       program.uniforms.hover.value += (effectiveHover - program.uniforms.hover.value) * 0.1;
-      if (rotateOnHover && effectiveHover > 0.5) {
-        currentRot += dt * rotationSpeed;
+      if (rotateOnHover) {
+        currentRot += dt * rotationSpeed * program.uniforms.hover.value;
+        program.uniforms.rot.value = currentRot;
       }
-      program.uniforms.rot.value = currentRot;
       renderer.render({ scene: mesh });
     };
     rafId = requestAnimationFrame(update);
+
+    // Cleanup function
     return () => {
       cancelAnimationFrame(rafId);
-      window.removeEventListener("resize", resize);
-      container.removeEventListener("mousemove", handleMouseMove);
-      container.removeEventListener("mouseleave", handleMouseLeave);
-      container.removeChild(gl.canvas);
-      gl.getExtension("WEBGL_lose_context")?.loseContext();
+      window.removeEventListener('resize', resize);
+      container.removeEventListener('mousemove', handleMouseMove);
+      container.removeEventListener('mouseleave', handleMouseLeave);
+      
+      // Clean up WebGL resources
+      mesh.geometry.remove();
+      program.remove();
+      renderer.gl.getExtension('WEBGL_lose_context')?.loseContext();
+      gl.canvas.remove();
     };
   }, [hue, hoverIntensity, rotateOnHover, forceHoverState]);
-  return <div ref={ctnDom} className="orb-container" />;
+
+  return (
+    <div ref={ctnDom} className="orb-container" />
+  );
 } 

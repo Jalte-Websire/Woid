@@ -2,18 +2,26 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
-import Footer from '../components/Footer';
+import MagicBento from '../components/MagicBento';
 import {
-  CircleIcon, // planet
-  SquareIcon, // asteroid
-  TriangleIcon, // komet
-  OrbitIcon, // solsystem
-  GridIcon, // galakse
-  StarIcon, // stjerne
-  OverlappingSquaresIcon, // saturn
-  CrossIcon, // nebula
-  SolarSystemIcon, // ellipse solsystem
-  HexagonIcon // sort hul
+  LaptopIcon,
+  CodeIcon,
+  MobileIcon,
+  GearsIcon,
+  BrainNetworkIcon,
+  GrowthGraphIcon,
+  CircleIcon,
+  SquareIcon,
+  TriangleIcon,
+  OrbitIcon,
+  GridIcon,
+  StarIcon,
+  SpotifyIcon,
+  AdobeIcon,
+  SalesforceIcon,
+  ShopifyIcon,
+  StripeIcon,
+  SlackIcon
 } from '../components/Icons';
 import styles from './page.module.css';
 
@@ -22,6 +30,7 @@ export default function Home() {
   const [projects, setProjects] = useState(0);
   const [satisfaction, setSatisfaction] = useState(0);
   const [team, setTeam] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     let proj = 0, sat = 0, tm = 0;
@@ -51,55 +60,122 @@ export default function Home() {
       <main>
         <Hero />
         
-        {/* Statistik/benchmarks sektion fjernet */}
+        {/* Brand Section */}
+        <section className={styles.brandSection}>
+          <div className={styles.container}>
+            <h3 className={styles.brandTitle}>Værktøjer vi arbejder med</h3>
+            <div className={styles.brandGrid}>
+              <div className={styles.brandItem}>
+                <SpotifyIcon />
+                <span>Spotify</span>
+              </div>
+              <div className={styles.brandItem}>
+                <AdobeIcon />
+                <span>Adobe</span>
+              </div>
+              <div className={styles.brandItem}>
+                <SalesforceIcon />
+                <span>Salesforce</span>
+              </div>
+              <div className={styles.brandItem}>
+                <ShopifyIcon />
+                <span>Shopify</span>
+              </div>
+              <div className={styles.brandItem}>
+                <StripeIcon />
+                <span>Stripe</span>
+              </div>
+              <div className={styles.brandItem}>
+                <SlackIcon />
+                <span>Slack</span>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Services */}
         <section className={styles.services}>
           <div className={styles.container}>
-            <h2 className={styles.sectionTitle}>Vores services</h2>
-            <p className={styles.sectionSubtitle}>Komplette digitale løsninger til moderne virksomheder</p>
+            <h2 className={styles.sectionTitle}>Komplette digitale løsninger</h2>
+            <p className={styles.sectionSubtitle}>Vi leverer end-to-end digitale løsninger der driver forretningsvækst og brugerengagement</p>
             <div className={styles.serviceGrid}>
               <div className={styles.service}>
                 <div className={styles.serviceIcon + ' ' + styles.iconWrapper}>
-                  <CircleIcon />
+                  <LaptopIcon />
                 </div>
-                <h3>Web design</h3>
-                <p>Skræddersyede, responsive hjemmesider der fanger og konverterer. Ren æstetik med kraftfuld funktionalitet.</p>
+                <h3>Website udvikling</h3>
+                <p>Skræddersyede websites der konverterer og engagerer dine besøgende. Ren æstetik med kraftfuld funktionalitet.</p>
+                <ul className={styles.featureList}>
+                  <li>Responsive design til alle enheder</li>
+                  <li>SEO-optimeret kode</li>
+                  <li>Hurtig indlæsningstid</li>
+                  <li>Skalerbar arkitektur</li>
+                </ul>
               </div>
               <div className={styles.service}>
                 <div className={styles.serviceIcon + ' ' + styles.iconWrapper}>
-                  <SquareIcon />
+                  <CodeIcon />
                 </div>
-                <h3>Web udvikling</h3>
-                <p>Skalerbare webapplikationer bygget med cutting-edge teknologi. Performance og sikkerhed i centrum.</p>
+                <h3>E-handel løsninger</h3>
+                <p>Professionelle webshops der sælger og vokser din virksomhed. Bygget til at konvertere og skabe loyalitet.</p>
+                <ul className={styles.featureList}>
+                  <li>Sikker betalingsbehandling</li>
+                  <li>Lagerstyring integration</li>
+                  <li>Mobil-venlig shopping</li>
+                  <li>Avancerede analytics</li>
+                </ul>
               </div>
               <div className={styles.service}>
                 <div className={styles.serviceIcon + ' ' + styles.iconWrapper}>
-                  <TriangleIcon />
+                  <MobileIcon />
                 </div>
-                <h3>Mobile apps</h3>
-                <p>Native og cross-platform applikationer der leverer exceptionelle brugeroplevelser på alle enheder.</p>
+                <h3>App udvikling</h3>
+                <p>Native og web apps der giver dine kunder en fantastisk oplevelse. Performance og brugeroplevelse i centrum.</p>
+                <ul className={styles.featureList}>
+                  <li>iOS og Android apps</li>
+                  <li>Progressive Web Apps</li>
+                  <li>Push-notifikationer</li>
+                  <li>Offline funktionalitet</li>
+                </ul>
               </div>
               <div className={styles.service}>
                 <div className={styles.serviceIcon + ' ' + styles.iconWrapper}>
-                  <OverlappingSquaresIcon />
+                  <GearsIcon />
                 </div>
-                <h3>Automatisering</h3>
-                <p>Effektiviser dine arbejdsgange med intelligente automatiseringer, integrationer og workflows, der sparer tid og minimerer fejl.</p>
+                <h3>UI/UX design</h3>
+                <p>Brugeroplevelser der engagerer og konverterer dine besøgende. Data-drevet design med fokus på resultater.</p>
+                <ul className={styles.featureList}>
+                  <li>Brugercentreret design</li>
+                  <li>Prototyping og testing</li>
+                  <li>Design systemer</li>
+                  <li>Konverteringsoptimering</li>
+                </ul>
               </div>
               <div className={styles.service}>
                 <div className={styles.serviceIcon + ' ' + styles.iconWrapper}>
-                  <HexagonIcon />
+                  <BrainNetworkIcon />
                 </div>
-                <h3>AI & Machine Learning</h3>
-                <p>Udnyt kunstig intelligens og machine learning til at skabe smartere digitale løsninger, der lærer og optimerer over tid.</p>
+                <h3>Vedligeholdelse</h3>
+                <p>Kontinuerlig opdatering og support til dine digitale løsninger. Sikkerhed og performance i fokus.</p>
+                <ul className={styles.featureList}>
+                  <li>24/7 overvågning</li>
+                  <li>Regelmæssige opdateringer</li>
+                  <li>Teknisk support</li>
+                  <li>Sikkerhedsopdateringer</li>
+                </ul>
               </div>
               <div className={styles.service}>
                 <div className={styles.serviceIcon + ' ' + styles.iconWrapper}>
-                  <OrbitIcon />
+                  <GrowthGraphIcon />
                 </div>
                 <h3>Digital strategi</h3>
-                <p>Data-drevne tilgange til digital transformation. Vi aligner teknologi med dine forretningsmål.</p>
+                <p>Strategisk rådgivning til at maksimere din digitale tilstedeværelse. Data-drevne beslutninger for vækst.</p>
+                <ul className={styles.featureList}>
+                  <li>SEO og digital markedsføring</li>
+                  <li>Analytics og rapportering</li>
+                  <li>Konverteringsoptimering</li>
+                  <li>Forretningsanalyse</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -109,34 +185,48 @@ export default function Home() {
         <section className={styles.partnersSection}>
           <div className={styles.container}>
             <h3 className={styles.partnersTitle}>Betroet af brancheledere</h3>
-          </div>
-          <div className={styles.logoBanner}>
-            <div className={styles.logoTrack}>
-              <div className={styles.logoItem}>Microsoft</div>
-              <div className={styles.logoItem}>Google</div>
-              <div className={styles.logoItem}>Apple</div>
-              <div className={styles.logoItem}>Amazon</div>
-              <div className={styles.logoItem}>Netflix</div>
-              <div className={styles.logoItem}>Spotify</div>
-              <div className={styles.logoItem}>Adobe</div>
-              <div className={styles.logoItem}>Salesforce</div>
-              <div className={styles.logoItem}>Shopify</div>
-              <div className={styles.logoItem}>Stripe</div>
-              <div className={styles.logoItem}>Slack</div>
-              <div className={styles.logoItem}>Figma</div>
-              {/* Duplicate logos for seamless loop */}
-              <div className={styles.logoItem}>Microsoft</div>
-              <div className={styles.logoItem}>Google</div>
-              <div className={styles.logoItem}>Apple</div>
-              <div className={styles.logoItem}>Amazon</div>
-              <div className={styles.logoItem}>Netflix</div>
-              <div className={styles.logoItem}>Spotify</div>
-              <div className={styles.logoItem}>Adobe</div>
-              <div className={styles.logoItem}>Salesforce</div>
-              <div className={styles.logoItem}>Shopify</div>
-              <div className={styles.logoItem}>Stripe</div>
-              <div className={styles.logoItem}>Slack</div>
-              <div className={styles.logoItem}>Figma</div>
+            <div className={styles.carouselContainer}>
+              <button 
+                className={`${styles.carouselButton} ${styles.prevButton}`}
+                onClick={() => setCurrentPage(prev => prev > 0 ? prev - 1 : Math.floor(23 / 16))}
+                aria-label="Previous page"
+              >
+                ←
+              </button>
+              
+              <div className={styles.logoGrid}>
+                {[...Array(16)].map((_, i) => {
+                  const logoIndex = currentPage * 16 + i;
+                  if (logoIndex >= 23) return null; // Don't render if we're past the total logos
+                  return (
+                    <div key={i} className={styles.logoItem}>
+                      <img 
+                        src={`/logos/logo-${logoIndex + 1}.png`} 
+                        alt={`Partner logo ${logoIndex + 1}`}
+                        className={styles.logoImage}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+
+              <button 
+                className={`${styles.carouselButton} ${styles.nextButton}`}
+                onClick={() => setCurrentPage(prev => (prev + 1) * 16 >= 23 ? 0 : prev + 1)}
+                aria-label="Next page"
+              >
+                →
+              </button>
+            </div>
+            <div className={styles.pageIndicator}>
+              {[...Array(Math.ceil(23 / 16))].map((_, i) => (
+                <button
+                  key={i}
+                  className={`${styles.pageDot} ${currentPage === i ? styles.activeDot : ''}`}
+                  onClick={() => setCurrentPage(i)}
+                  aria-label={`Go to page ${i + 1}`}
+                />
+              ))}
             </div>
           </div>
         </section>
@@ -144,54 +234,70 @@ export default function Home() {
         {/* Benefits */}
         <section className={styles.benefits}>
           <div className={styles.container}>
-            <h2 className={styles.sectionTitle}>Hvorfor vælge Woit?</h2>
+            <h2 className={styles.sectionTitle}>Hvorfor vælge woid?</h2>
             <div className={styles.benefitGrid}>
               <div className={styles.benefit}>
+                <div className={styles.benefitIcon + ' ' + styles.iconWrapper}>
+                  <CircleIcon />
+                </div>
                 <h3>Strategisk tilgang</h3>
                 <p>Vi bygger ikke bare hjemmesider—vi skaber digitale oplevelser der driver forretningsvækst og brugerengagement.</p>
               </div>
               <div className={styles.benefit}>
+                <div className={styles.benefitIcon + ' ' + styles.iconWrapper}>
+                  <SquareIcon />
+                </div>
                 <h3>Performance fokuseret</h3>
                 <p>Lynhurtige loadingstider og optimeret performance sikrer at dine brugere forbliver engagerede og konverterer.</p>
               </div>
               <div className={styles.benefit}>
+                <div className={styles.benefitIcon + ' ' + styles.iconWrapper}>
+                  <TriangleIcon />
+                </div>
                 <h3>Enterprise sikkerhed</h3>
                 <p>Bank-niveau sikkerhedsprotokoller beskytter dine data og dine brugers information med branche best practices.</p>
               </div>
               <div className={styles.benefit}>
+                <div className={styles.benefitIcon + ' ' + styles.iconWrapper}>
+                  <OrbitIcon />
+                </div>
                 <h3>Skalerbare løsninger</h3>
                 <p>Bygget til at vokse med din virksomhed. Vores løsninger skalerer problemfrit når dine behov udvikler sig.</p>
+              </div>
+              <div className={styles.benefit}>
+                <div className={styles.benefitIcon + ' ' + styles.iconWrapper}>
+                  <GridIcon />
+                </div>
+                <h3>Innovativ teknologi</h3>
+                <p>Vi holder os på forkant med den nyeste teknologi og implementerer innovative løsninger der giver dig en konkurrencemæssig fordel.</p>
+              </div>
+              <div className={styles.benefit}>
+                <div className={styles.benefitIcon + ' ' + styles.iconWrapper}>
+                  <StarIcon />
+                </div>
+                <h3>Dedikeret support</h3>
+                <p>Vores erfarne team står klar med support og vedligeholdelse, så din digitale løsning altid performer optimalt.</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Process */}
+        {/* Process Bento Grid */}
         <section className={styles.process}>
           <div className={styles.container}>
-            <h2 className={styles.sectionTitle}>Vores proces</h2>
-            <div className={styles.steps}>
-              <div className={styles.step}>
-                <div className={styles.stepNumber}>01</div>
-                <h3>Discovery</h3>
-                <p>Vi analyserer dine forretningsmål, målgruppe og tekniske krav for at skabe en strategisk roadmap.</p>
-              </div>
-              <div className={styles.step}>
-                <div className={styles.stepNumber}>02</div>
-                <h3>Design</h3>
-                <p>Vores designere skaber storslåede, bruger-centrerede interfaces der aligner med dit brand og forretningsmål.</p>
-              </div>
-              <div className={styles.step}>
-                <div className={styles.stepNumber}>03</div>
-                <h3>Udvikling</h3>
-                <p>Ekspert udviklere bringer designs til live med ren, vedligeholdelsesvenlig kode og cutting-edge teknologier.</p>
-              </div>
-              <div className={styles.step}>
-                <div className={styles.stepNumber}>04</div>
-                <h3>Launch</h3>
-                <p>Rigoros testning og optimering sikrer en fejlfri launch med løbende support og vedligeholdelse.</p>
-              </div>
-            </div>
+            <h2 className={styles.sectionTitle}>Vores process</h2>
+            <MagicBento 
+              textAutoHide={false}
+              enableStars={true}
+              enableSpotlight={true}
+              enableBorderGlow={true}
+              enableTilt={false}
+              enableMagnetism={false}
+              clickEffect={false}
+              spotlightRadius={400}
+              particleCount={6}
+              glowColor="255, 255, 255"
+            />
           </div>
         </section>
 
@@ -202,7 +308,7 @@ export default function Home() {
             <div className={styles.testimonialGrid}>
               <div className={styles.testimonial}>
                 <div className={styles.testimonialContent}>
-                  <p>"Woit transformerede vores digitale tilstedeværelse fuldstændigt. Den nye hjemmeside øgede vores konverteringer med 300%."</p>
+                  <p>"woid transformerede vores digitale tilstedeværelse fuldstændigt. Den nye hjemmeside øgede vores konverteringer med 300%."</p>
                 </div>
                 <div className={styles.testimonialAuthor}>
                   <strong>Sarah Jensen</strong>
@@ -220,7 +326,7 @@ export default function Home() {
               </div>
               <div className={styles.testimonial}>
                 <div className={styles.testimonialContent}>
-                  <p>"Professionelle, responsive og resultat-drevne. Woit er vores go-to partner for alle digitale projekter."</p>
+                  <p>"Professionelle, responsive og resultat-drevne. woid er vores go-to partner for alle digitale projekter."</p>
                 </div>
                 <div className={styles.testimonialAuthor}>
                   <strong>Emma Nielsen</strong>
@@ -243,7 +349,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   );
 }

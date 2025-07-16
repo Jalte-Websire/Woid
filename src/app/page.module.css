@@ -59,7 +59,7 @@
   background: var(--card);
   border-radius: var(--radius);
   padding: 2.5rem;
-  text-align: center;
+  text-align: left;
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -92,7 +92,7 @@
 .serviceIcon {
   margin-bottom: 1.5rem;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   color: var(--primary);
 }
 
@@ -106,79 +106,89 @@
 
 .service p {
   color: var(--muted-foreground);
-  margin-bottom: 0;
+  margin-bottom: 1.5rem;
   line-height: 1.7;
   letter-spacing: var(--tracking-normal);
 }
 
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.featureList li {
+  color: var(--muted-foreground);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.featureList li::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 10px;
+  background: var(--primary);
+  border-radius: 50%;
+}
+
 /* Trusted Partners Banner */
 .partnersSection {
-  padding: 4rem 0;
+  padding: 6rem 0;
   background: var(--card);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  overflow: hidden;
 }
 
 .partnersTitle {
   text-align: center;
   color: var(--muted-foreground);
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
+  font-size: 1.25rem;
+  margin-bottom: 3rem;
   font-weight: 500;
   letter-spacing: var(--tracking-normal);
 }
 
-.logoBanner {
+.logoGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 2.5rem;
   width: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-.logoTrack {
-  display: flex;
-  animation: scroll 30s linear infinite;
-  width: fit-content;
 }
 
 .logoItem {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 180px;
-  height: 80px;
-  margin: 0 20px;
+  height: 160px;
+  padding: 1rem;
   background: var(--background);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  color: var(--muted-foreground);
-  font-weight: 600;
-  font-size: 1rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  white-space: nowrap;
-  flex-shrink: 0;
-  letter-spacing: var(--tracking-normal);
+}
+
+.logoImage {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.7;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .logoItem:hover {
-  background: var(--primary);
-  color: var(--primary-foreground);
+  background: var(--background);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-/* Pause animation on hover */
-.logoBanner:hover .logoTrack {
-  animation-play-state: paused;
+.logoItem:hover .logoImage {
+  opacity: 1;
 }
 
 /* Benefits */
@@ -189,8 +199,10 @@
 
 .benefitGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .benefit {
@@ -203,6 +215,21 @@
   display: flex;
   justify-content: center;
   color: var(--primary);
+  width: 64px;
+  height: 64px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.benefitIcon svg {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.benefit:hover .benefitIcon svg {
+  transform: scale(1.1);
 }
 
 .benefit h3 {
@@ -222,7 +249,7 @@
 /* Process */
 .process {
   padding: 6rem 0;
-  background: var(--card);
+  background: var(--background);
   position: relative;
 }
 
@@ -233,9 +260,21 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 70% 30%, var(--accent) 0%, transparent 50%);
+  background: radial-gradient(circle at 70% 30%, var(--primary) 0%, transparent 50%);
   opacity: 0.05;
   z-index: 1;
+}
+
+.process .container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.process .sectionTitle {
+  margin-bottom: 3rem;
 }
 
 .steps {
@@ -269,7 +308,7 @@
 
 .step h3 {
   color: var(--foreground);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   margin-bottom: 1rem;
   font-weight: 600;
   letter-spacing: var(--tracking-normal);
@@ -523,6 +562,223 @@
   opacity: 0.8;
 }
 
+.brandSection {
+  padding: 2rem 0;
+  background: var(--background);
+  position: relative;
+  margin-top: -2rem;
+  z-index: 10;
+}
+
+.brandTitle {
+  text-align: center;
+  color: var(--muted-foreground);
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-normal);
+  opacity: 0.7;
+}
+
+.brandGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+  align-items: center;
+  justify-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.brandItem {
+  font-size: 1rem;
+  color: var(--muted-foreground);
+  font-weight: 500;
+  background: #1a1a1a;
+  padding: 0.75rem 1.5rem;
+  border-radius: 100px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brandItem svg {
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.brandItem:hover {
+  transform: translateY(-2px);
+  background: #222;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.brandItem:hover svg {
+  opacity: 1;
+}
+
+.carouselContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+.carouselButton {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--foreground);
+  font-size: 1.75rem;
+  flex-shrink: 0;
+  margin: 0 1rem;
+}
+
+.carouselButton:hover {
+  background: var(--accent);
+  color: var(--accent-foreground);
+  transform: scale(1.1);
+}
+
+.pageIndicator {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.pageDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.activeDot {
+  background: var(--accent);
+  transform: scale(1.2);
+}
+
+@media (max-width: 1920px) {
+  .carouselContainer {
+    max-width: 1600px;
+  }
+}
+
+@media (max-width: 1600px) {
+  .carouselContainer {
+    max-width: 1400px;
+  }
+  
+  .logoItem {
+    height: 160px;
+  }
+  
+  .logoGrid {
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 1400px) {
+  .carouselContainer {
+    max-width: 1200px;
+  }
+  
+  .logoItem {
+    height: 140px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .brandGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 600px;
+  }
+  .logoGrid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  
+  .carouselContainer {
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .logoGrid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .logoItem {
+    height: 120px;
+  }
+  
+  .carouselButton {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .logoGrid {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  
+  .carouselButton {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .carouselContainer {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .brandGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    padding: 0 0.5rem;
+  }
+  
+  .brandSection {
+    padding: 1.5rem 0;
+  }
+
+  .brandItem {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
 @media (max-width: 768px) {
   .sectionTitle {
     font-size: clamp(1.8rem, 4vw, 2.5rem);
@@ -560,12 +816,29 @@
   }
   
   .partnersSection {
-    padding: 3rem 0;
+    padding: 4rem 0;
   }
   
+  .logoGrid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+
   .logoItem {
-    min-width: 140px;
-    height: 60px;
+    height: 120px;
+    padding: 1.5rem;
+  }
+
+  .benefitGrid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .service {
+    padding: 2rem;
+  }
+  
+  .featureList li {
     font-size: 0.9rem;
   }
 }

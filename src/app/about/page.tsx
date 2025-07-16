@@ -1,7 +1,8 @@
+"use client";
+
 import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import { GridIcon, CrossIcon, HexagonIcon } from '../../components/Icons';
-import SplitText from '../../components/SplitText';
+import { GridIcon, StarIcon, CircleIcon } from '../../components/Icons';
+import BlurText from '../../components/BlurText';
 import styles from './about.module.css';
 
 export default function About() {
@@ -11,21 +12,16 @@ export default function About() {
       <main className={styles.main}>
         <section className={styles.hero}>
           <div className={styles.container}>
-            <SplitText
-              text="Om Woit"
+            <BlurText
+              text="Om woid"
               className={styles.title}
-              splitType="chars"
-              textAlign="center"
-              duration={1}
-              delay={20}
+              type="title"
             />
-            <SplitText
+            <BlurText
               text="Skaber digital excellence gennem innovativt design og cutting-edge teknologi siden 2020"
               className={styles.subtitle}
-              splitType="words"
-              textAlign="center"
-              duration={1}
-              delay={20}
+              type="subtitle"
+              delay={0.1}
             />
           </div>
         </section>
@@ -37,7 +33,7 @@ export default function About() {
             <div className={styles.section}>
               <h2>Vores mission</h2>
               <p>
-                Hos Woit tror vi på, at exceptionelle digitale oplevelser er fundamentet for moderne forretningssucces. 
+                Hos woid tror vi på, at exceptionelle digitale oplevelser er fundamentet for moderne forretningssucces. 
                 Vores mission er at transformere idéer til kraftfulde digitale løsninger der driver vækst, engagerer brugere 
                 og skaber varig indflydelse i det digitale landskab.
               </p>
@@ -46,7 +42,7 @@ export default function About() {
             <div className={styles.section}>
               <h2>Vores historie</h2>
               <p>
-                Grundlagt i 2020 af et team af passionerede designere og udviklere, har Woit udviklet sig fra en lille 
+                Grundlagt i 2020 af et team af passionerede designere og udviklere, har woid udviklet sig fra en lille 
                 startup til en førende digital agentur. Vi har hjulpet hundredvis af virksomheder med at etablere deres digitale 
                 tilstedeværelse og opnå bemærkelsesværdige resultater gennem innovativt design og teknologi.
               </p>
@@ -119,7 +115,7 @@ export default function About() {
               <div className={styles.timelineItem}>
                 <div className={styles.timelineYear}>2020</div>
                 <div className={styles.timelineContent}>
-                  <h3>Woit grundlagt</h3>
+                  <h3>woid grundlagt</h3>
                   <p>Startede med en vision om at skabe exceptionelle digitale oplevelser</p>
                 </div>
               </div>
@@ -162,7 +158,6 @@ export default function About() {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   );
 } 
